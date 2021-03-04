@@ -15,3 +15,8 @@ $ npm test
 **Observação**: Existe um problema de escopo na função que nossos engenheiros não conseguiram identificar o problema, a quantidade de dividas que o consumidor possui está incorreta, ou seja o consumidor mesmo pagando acordos não diminui as dividas em aberto, contamos com voce para corrigir esse problema no __JavaScript__.
 
 #### Objetivo do exercício: Teste de logica e refactoring;
+
+---
+<br>
+
+## Dentro da pasta `docs` esta a forma como resolvi o problema
