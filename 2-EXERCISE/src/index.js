@@ -3,16 +3,16 @@ function User(score, hasBoost = true) {
   var debts = 0
 
   this.setScore = function (score) {
-    score = score
+    this.score = score
   }
 
   this.setDebts = function (debts) {
-    debts = debts
+    this.debts = debts
   }
 
   this.acceptOffer = () => {
     // Pagou sua negociação
-    debts -= 1
+    this.debts -= 1
     history.push({
       status: 'accept'
     })
@@ -20,7 +20,7 @@ function User(score, hasBoost = true) {
 
   this.brokenOffer = () => {
     // Quebrou algum acordo por nao ter pago a dívida ou apareceu mais uma negativaçāo no seu CPF
-    debts += 1
+    this.debts += 1
     history.push({
       status: 'broken'
     })
@@ -30,7 +30,7 @@ function User(score, hasBoost = true) {
     var boost = this.statusBoost()
 
     var boostMessage = ''
-    var boostValue = Math.round(boost[1])
+    var boostValue = Math.round(boost[1]) == 0 ? boost[1] : Math.round(boost[1]);
 
     if (boost[0] == 5) {
       boostMessage = 'Você não possui turbo disponível'
@@ -72,13 +72,13 @@ function User(score, hasBoost = true) {
       lost = maxBoost
     } else if (history.find(h => h.status === 'accept')) {
       var debtsPaid = history.filter(h => h.status === 'accept').length
-      if (0 == debts) {
+      if (0 == this.debts) {
         // Caso o consumidor tenha pago todas suas dividas, ele tem um boost completo e ativo!
         available = 0
         complete = maxBoost
       } else {
         // O consumidor não terminou de pagar suas contas é não quebrou nenhum acordo
-        available = maxBoost / (debts + debtsPaid)
+        available = maxBoost / (this.debts + debtsPaid)
         pending = maxBoost - available
       }
     }
